@@ -1,0 +1,62 @@
+19:36:25.060 INFO: JdwpDebugServer: handling req: VirtualMachine(1).IDSizes(7)
+19:36:25.064 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.065 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=100, eventKind=CLASS_PREPARE, suspendPolicy=NONE, predicates=[]}
+19:36:25.066 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.066 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=101, eventKind=CLASS_UNLOAD, suspendPolicy=NONE, predicates=[]}
+19:36:25.196 INFO: JdwpDebugServer: handling req: VirtualMachine(1).Version(1)
+19:36:25.202 INFO: JdwpDebugServer: handling req: VirtualMachine(1).capabilitiesNew(17)
+19:36:25.203 INFO: JdwpDebugServer: handling req: VirtualMachine(1).capabilities(12)
+19:36:25.208 INFO: JdwpDebugServer: handling req: VirtualMachine(1).AllClassesWithGeneric(20)
+19:36:25.212 INFO: JdwpDebugServer: handling req: VirtualMachine(1).TopLevelThreadGroups(5)
+19:36:25.224 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.224 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=102, eventKind=THREAD_START, suspendPolicy=NONE, predicates=[]}
+19:36:25.224 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.225 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=103, eventKind=THREAD_DEATH, suspendPolicy=NONE, predicates=[]}
+19:36:25.369 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.371 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=104, eventKind=CLASS_PREPARE, suspendPolicy=EVENT_THREAD, predicates=[className=sun.instrument.InstrumentationImpl]}
+19:36:25.374 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.375 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=105, eventKind=CLASS_PREPARE, suspendPolicy=EVENT_THREAD, predicates=[className=sun.instrument.InstrumentationImpl]}
+19:36:25.391 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.392 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=106, eventKind=CLASS_PREPARE, suspendPolicy=EVENT_THREAD, predicates=[className=java.lang.PathClassLoader]}
+19:36:25.402 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.402 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=107, eventKind=CLASS_PREPARE, suspendPolicy=EVENT_THREAD, predicates=[className=java.lang.NoClassDefFoundError]}
+19:36:25.854 INFO: JdwpEventCenterDelegate: THREAD_STARTED: thread (33, main, main)
+19:36:25.866 INFO: JdwpDebugServer: handling req: VirtualMachine(1).Resume(9)
+19:36:25.866 INFO: JdwpEventCenterDelegate: THREAD_RESUMED: thread (33, main, main)
+19:36:25.867 INFO: JdwpDebugServer: handling req: EventRequest(15).Set(1)
+19:36:25.868 INFO: JdwpEventCenterDelegate: THREAD_STARTED: thread (48, ReferenceQueueDaemon, main)
+19:36:25.869 INFO: JdwpEventCenterDelegate: THREAD_STARTED: thread (63, FinalizerDaemon, main)
+19:36:25.872 SEVERE: Debugger: Thread HooksChannel socket thread crashed
+org.robovm.debugger.DebuggerException: java.net.SocketException: Connection reset
+	at org.robovm.debugger.hooks.HooksChannel.doSocketWork(HooksChannel.java:149)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+	at org.robovm.debugger.utils.DebuggerThread.run(DebuggerThread.java:42)
+Caused by: java.net.SocketException: Connection reset
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:186)
+	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:140)
+	at org.robovm.debugger.utils.bytebuffer.DataBufferWriter.writeFromStream(DataBufferWriter.java:89)
+	at org.robovm.debugger.hooks.HooksChannel.doSocketWork(HooksChannel.java:116)
+	... 2 more
+19:36:26.375 SEVERE: Debugger: Thread EventCenterThread crashed
+org.robovm.debugger.DebuggerException: java.lang.InterruptedException
+	at org.robovm.debugger.hooks.HooksChannel.sendCommand(HooksChannel.java:183)
+	at org.robovm.debugger.hooks.HooksChannel.readMemory(HooksChannel.java:196)
+	at org.robovm.debugger.hooks.unitls.TargetByteBufferReader.readBytes(TargetByteBufferReader.java:104)
+	at org.robovm.debugger.delegates.JdwpArrayDelegate.readArrayString(JdwpArrayDelegate.java:197)
+	at org.robovm.debugger.delegates.InstanceUtils.readStringValue(InstanceUtils.java:126)
+	at org.robovm.debugger.delegates.InstanceUtils.createThreadInstance(InstanceUtils.java:679)
+	at org.robovm.debugger.delegates.InstanceUtils.instanceByPointer(InstanceUtils.java:444)
+	at org.robovm.debugger.delegates.InstanceUtils.instanceByPointer(InstanceUtils.java:454)
+	at org.robovm.debugger.delegates.JdwpEventCenterDelegate.processThreadEvent(JdwpEventCenterDelegate.java:652)
+	at org.robovm.debugger.delegates.JdwpEventCenterDelegate.processSingleEvent(JdwpEventCenterDelegate.java:514)
+	at org.robovm.debugger.delegates.JdwpEventCenterDelegate.processEventsCycle(JdwpEventCenterDelegate.java:486)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+	at org.robovm.debugger.utils.DebuggerThread.run(DebuggerThread.java:42)
+Caused by: java.lang.InterruptedException
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.doAcquireSharedNanos(AbstractQueuedSynchronizer.java:1081)
+	at java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer.tryAcquireSharedNanos(AbstractQueuedSynchronizer.java:1369)
+	at java.base/java.util.concurrent.Semaphore.tryAcquire(Semaphore.java:415)
+	at org.robovm.debugger.hooks.HookReqHolder.aquire(HookReqHolder.java:41)
+	at org.robovm.debugger.hooks.HooksChannel.sendCommand(HooksChannel.java:179)
+	... 12 more
+19:36:26.375 INFO: JdwpEventCenterDelegate: jdwpSetEventRequest: JdwpEventRequest{requestId=108, eventKind=EXCEPTION, suspendPolicy=EVENT_THREAD, predicates=[exceptionType=2135(caught=true, uncaught=true)]}
