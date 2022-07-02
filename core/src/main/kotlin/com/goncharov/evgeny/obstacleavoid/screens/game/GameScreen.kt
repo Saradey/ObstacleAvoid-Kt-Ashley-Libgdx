@@ -29,7 +29,6 @@ class GameScreen(
     private val shapeRenderer: ShapeRenderer,
     private val batch: SpriteBatch,
     private val navigation: Navigation,
-    private val fpsMonitorManager: FpsMonitorManager
 ) : BaseScreen() {
 
     private val gameCamera = OrthographicCamera()

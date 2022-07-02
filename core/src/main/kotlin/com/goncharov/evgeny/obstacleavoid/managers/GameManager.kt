@@ -2,12 +2,15 @@ package com.goncharov.evgeny.obstacleavoid.managers
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
+import com.goncharov.evgeny.obstacleavoid.consts.LIVES_START
 import com.goncharov.evgeny.obstacleavoid.managers.models.DifficultyLevel
 
 object GameManager {
 
     private var highScore = 0
     private var difficultyLevel = DifficultyLevel.MEDIUM
+    var score = 0
+    var lives = LIVES_START
 
     private val prefs: Preferences by lazy {
         Gdx.app.getPreferences(PREFS_NAME)
@@ -25,7 +28,7 @@ object GameManager {
         return difficultyLevel
     }
 
-    fun updateHighScore(score: Int) {
+    fun updateHighScore() {
         if (score < getHighScore()) {
             return
         }
@@ -33,6 +36,21 @@ object GameManager {
         prefs.putInteger(HIGH_SCORE_KEY, highScore)
         prefs.flush()
     }
+
+    fun reset() {
+        lives = LIVES_START
+        score = 0
+    }
+
+    fun updateScore(amount: Int) {
+        score += amount
+    }
+
+    fun decrementLives() {
+        lives--
+    }
+
+    fun isGameOver(): Boolean = lives <= 0
 
     fun updateDifficulty(newDifficultyLevel: DifficultyLevel) {
         if (newDifficultyLevel == getDifficultyLevel()) {

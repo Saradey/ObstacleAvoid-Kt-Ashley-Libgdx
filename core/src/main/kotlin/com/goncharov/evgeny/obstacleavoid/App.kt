@@ -76,7 +76,7 @@ class App : Game(), Navigation, FpsMonitorManager {
                 MenuScreen(this, assetManager, batch, this)
             )
             KeyNavigation.GameKey -> setScreen(
-                GameScreen(assetManager, debugRender, batch, this, this)
+                GameScreen(assetManager, debugRender, batch, this)
             )
             KeyNavigation.HighScoreKey -> setScreen(
                 HighScoreScreen(this, assetManager, batch, this)
