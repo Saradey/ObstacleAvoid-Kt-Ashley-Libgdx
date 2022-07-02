@@ -127,7 +127,7 @@ class GameController(
             lives--
             if (isGameOver()) {
                 debug("GameController", "Game Over!!!")
-                GameManager.updateHighScore(score)
+                GameManager.updateHighScore()
             } else {
                 restart()
             }
