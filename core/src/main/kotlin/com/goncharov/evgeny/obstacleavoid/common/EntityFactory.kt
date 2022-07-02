@@ -50,10 +50,36 @@ class EntityFactory(
         position.x = x
         position.y = y
         val cleanUp = engine.createComponent(CleanUpComponent::class.java)
-
+        val obstacle = engine.createComponent(ObstacleComponent::class.java)
+        val texture = engine.createComponent(TextureComponent::class.java)
+        texture.textureRegion = gamePlayAtlas.findRegion(OBSTACLE)
+        val dimension = engine.createComponent(DimensionComponent::class.java)
+        dimension.width = OBSTACLE_SIZE
+        dimension.height = OBSTACLE_SIZE
+        val entity = engine.createEntity()
+        entity.add(bounds)
+        entity.add(movement)
+        entity.add(position)
+        entity.add(cleanUp)
+        entity.add(obstacle)
+        entity.add(texture)
+        entity.add(dimension)
+        engine.addEntity(entity)
     }
 
     fun addBackground() {
-
+        val texture = engine.createComponent(TextureComponent::class.java)
+        texture.textureRegion = gamePlayAtlas.findRegion(BACKGROUND)
+        val position = engine.createComponent(PositionComponent::class.java)
+        position.x = 0f
+        position.y = 0f
+        val dimension = engine.createComponent(DimensionComponent::class.java)
+        dimension.width = WORLD_WIDTH
+        dimension.height = WORLD_HEIGHT
+        val entity = engine.createEntity()
+        entity.add(texture)
+        entity.add(position)
+        entity.add(dimension)
+        engine.addEntity(entity)
     }
 }

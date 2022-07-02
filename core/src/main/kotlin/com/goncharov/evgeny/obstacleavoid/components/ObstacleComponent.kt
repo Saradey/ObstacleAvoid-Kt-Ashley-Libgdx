@@ -3,7 +3,9 @@ package com.goncharov.evgeny.obstacleavoid.components
 import com.badlogic.ashley.core.Component
 import com.badlogic.gdx.utils.Pool
 
-data class ObstacleComponent(var hit: Boolean) : Component, Pool.Poolable {
+class ObstacleComponent : Component, Pool.Poolable {
+
+    var hit: Boolean = false
 
     override fun reset() {
         hit = false
