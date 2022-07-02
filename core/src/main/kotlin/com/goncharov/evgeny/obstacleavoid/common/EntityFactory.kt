@@ -7,4 +7,12 @@ class EntityFactory(
     private val engine: PooledEngine,
     private val assetManager: AssetManager
 ) {
+
+    fun addBackground() {
+
+    }
+
+    fun addPlayer() {
+
+    }
 }
