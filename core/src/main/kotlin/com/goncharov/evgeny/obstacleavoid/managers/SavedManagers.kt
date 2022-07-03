@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
 import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.DIFFICULTY_KEY
+import com.goncharov.evgeny.obstacleavoid.consts.HIGH_SCORE_KEY
 import com.goncharov.evgeny.obstacleavoid.consts.PREFS_NAME
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 import com.goncharov.evgeny.obstacleavoid.models.DifficultyLevel
@@ -28,7 +29,14 @@ class SavedManagers(private val engine: Engine) {
         prefs.flush()
     }
 
-    fun savedHeightScore() {
-
+    fun savedHighScoreScore() {
+        val gameEntity = engine.getEntitiesFor(gameManagerFamily).first()
+        val gameComponent = Mappers.game[gameEntity]
+        val highScore = prefs.getInteger(HIGH_SCORE_KEY, 0)
+        if (gameComponent.score < highScore) {
+            return
+        }
+        prefs.putInteger(HIGH_SCORE_KEY, gameComponent.score)
+        prefs.flush()
     }
 }

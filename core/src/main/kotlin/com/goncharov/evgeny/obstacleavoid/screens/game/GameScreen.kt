@@ -13,6 +13,7 @@ import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.*
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.FONT_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.HIT_SOUND_DESCRIPTOR
+import com.goncharov.evgeny.obstacleavoid.managers.SavedManagers
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 import com.goncharov.evgeny.obstacleavoid.systems.*
@@ -36,6 +37,7 @@ class GameScreen(
     private val uiViewport = FitViewport(UI_WIDTH, UI_HEIGHT)
     private val engine = PooledEngine()
     private lateinit var factory: EntityFactory
+    private val savedManagers = SavedManagers(engine)
 
     override fun show() {
         debug("show")
@@ -49,7 +51,7 @@ class GameScreen(
         engine.addSystem(ObstacleSpawnSystem(factory))
         engine.addSystem(CleanUpSystem())
         engine.addSystem(CollisionSystem(assetManager))
-        engine.addSystem(GameOverSystem(navigation, factory))
+        engine.addSystem(GameOverSystem(navigation, factory, savedManagers))
         engine.addSystem(ScoreSystem())
         engine.addSystem(RenderSystem(gameViewport, batch))
         engine.addSystem(UiRenderSystem(font, uiViewport, batch))
