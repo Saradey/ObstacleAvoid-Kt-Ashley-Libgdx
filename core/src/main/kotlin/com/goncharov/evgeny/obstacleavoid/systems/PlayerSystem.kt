@@ -18,13 +18,13 @@ class PlayerSystem : IteratingSystem(
 ) {
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
+        val movement = Mappers.movement[entity]
+        movement.xSpeed = 0f
         when {
             Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
-                val movement = Mappers.movement[entity]
                 movement.xSpeed = MAX_PLAYER_X_SPEED
             }
             Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
-                val movement = Mappers.movement[entity]
                 movement.xSpeed = -MAX_PLAYER_X_SPEED
             }
         }
