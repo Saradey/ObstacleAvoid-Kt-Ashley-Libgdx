@@ -18,8 +18,8 @@ class EntityFactory(
 
     fun addPlayer() {
         val positionComponent = engine.createComponent(PositionComponent::class.java)
-        positionComponent.x = (WORLD_WIDTH - PLAYER_SIZE) / 2f
-        positionComponent.y = (1 - PLAYER_SIZE) / 2f
+        positionComponent.x = START_PLAYER_X
+        positionComponent.y = START_PLAYER_Y
         val boundComponent = engine.createComponent(BoundsComponent::class.java)
         boundComponent.bounds.set(positionComponent.x, positionComponent.y, PLAYER_BOUNDS_RADIUS)
         val movementComponent = engine.createComponent(MovementComponent::class.java)

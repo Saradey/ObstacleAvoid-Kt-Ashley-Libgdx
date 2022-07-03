@@ -34,9 +34,7 @@ abstract class BaseStageScreen(
 
     override fun show() {
         debug("show")
-        val inputMultiplexer = InputMultiplexer()
-        inputMultiplexer.addProcessor(stage)
-        Gdx.input.inputProcessor = inputMultiplexer
+        Gdx.input.inputProcessor = stage
         stage.addActor(initUi())
         if (DEBUG) {
 //            engine.addSystem(FpsMonitorSystem(batch, assetManager[FONT_DESCRIPTOR], viewport))
