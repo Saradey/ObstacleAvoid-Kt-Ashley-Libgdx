@@ -5,12 +5,12 @@ import com.badlogic.ashley.core.EntitySystem
 import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.utils.ImmutableArray
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.utils.Array
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.components.DimensionComponent
 import com.goncharov.evgeny.obstacleavoid.components.PositionComponent
 import com.goncharov.evgeny.obstacleavoid.components.TextureComponent
+import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
 class RenderSystem(
     private val gameViewport: Viewport,
@@ -23,12 +23,18 @@ class RenderSystem(
         DimensionComponent::class.java
     ).get()
 
+    private val debug by lazy {
+        Mappers.debug[engine.getEntitiesFor(gameManagerFamily).first()]
+    }
+
     override fun update(deltaTime: Float) {
-        gameViewport.apply()
-        batch.projectionMatrix = gameViewport.camera.combined
-        batch.begin()
-        draw(engine.getEntitiesFor(family))
-        batch.end()
+        if (debug.drawTexture) {
+            gameViewport.apply()
+            batch.projectionMatrix = gameViewport.camera.combined
+            batch.begin()
+            draw(engine.getEntitiesFor(family))
+            batch.end()
+        }
     }
 
     private fun draw(entities: ImmutableArray<Entity>) {

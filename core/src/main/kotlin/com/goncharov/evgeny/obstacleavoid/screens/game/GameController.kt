@@ -27,6 +27,11 @@ class GameController(
                 val gameComponent = Mappers.game[entity]
                 gameComponent.gameIsPause = !gameComponent.gameIsPause
             }
+            Input.Keys.V -> {
+                val entity = engine.getEntitiesFor(gameManagerFamily).first()
+                val debugComponent = Mappers.debug[entity]
+                debugComponent.drawTexture = !debugComponent.drawTexture
+            }
         }
         return true
     }
