@@ -8,19 +8,16 @@ import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_WIDTH
-import com.goncharov.evgeny.obstacleavoid.util.debug.DebugCameraController
 
 class DebugCameraSystem(
     private val gameCamera: OrthographicCamera,
-    private val startX: Float,
-    private val startY: Float
 ) : EntitySystem() {
 
     override fun update(deltaTime: Float) {
-        updateCamera(gameCamera)
+        updateGameCamera(gameCamera)
     }
 
-    fun updateCamera(camera: OrthographicCamera) {
+    private fun updateGameCamera(camera: OrthographicCamera) {
         when {
             Gdx.input.isKeyPressed(Input.Keys.LEFT) -> camera.position.x -= TRANSFORM_POSITION_SPEED_CAMERA
             Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> camera.position.x += TRANSFORM_POSITION_SPEED_CAMERA
