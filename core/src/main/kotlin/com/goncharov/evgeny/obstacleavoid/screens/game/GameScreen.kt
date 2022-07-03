@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.goncharov.evgeny.obstacleavoid.common.BaseScreen
 import com.goncharov.evgeny.obstacleavoid.common.EntityFactory
+import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.*
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.FONT_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.HIT_SOUND_DESCRIPTOR
-import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 import com.goncharov.evgeny.obstacleavoid.systems.*
@@ -39,33 +39,18 @@ class GameScreen(
 
     private val factory = EntityFactory(engine, assetManager)
 
-    private val hit = assetManager[HIT_SOUND_DESCRIPTOR]
-
-    private var reset = false
-
     override fun show() {
         debug("show")
         val font = assetManager[FONT_DESCRIPTOR]
         addEntities()
-        val listener = object : CollisionListener {
-            override fun hitObstacle() {
-                GameManager.decrementLives()
-                hit.play()
-                if (GameManager.isGameOver()) {
-                    GameManager.updateHighScore()
-                } else {
-                    engine.removeAllEntities()
-                    reset = true
-                }
-            }
-        }
         engine.addSystem(PlayerControlSystem(gameViewport))
         engine.addSystem(MovementSystem())
         engine.addSystem(WorldWrapSystem(gameViewport))
         engine.addSystem(BoundsSystem())
         engine.addSystem(ObstacleSpawnSystem(factory))
         engine.addSystem(CleanUpSystem())
-        engine.addSystem(CollisionSystem(listener))
+        engine.addSystem(CollisionSystem(assetManager))
+        engine.addSystem(GameOverSystem(navigation, factory))
         engine.addSystem(ScoreSystem())
         engine.addSystem(RenderSystem(gameViewport, batch))
         engine.addSystem(UiRenderSystem(font, uiViewport, batch))
@@ -80,14 +65,6 @@ class GameScreen(
     override fun render(delta: Float) {
         GdxUtils.clearScreen()
         engine.update(delta)
-        if (GameManager.isGameOver()) {
-            GameManager.reset()
-            navigation.navigate(KeyNavigation.MenuKey)
-        }
-        if (reset) {
-            reset = false
-            addEntities()
-        }
     }
 
     override fun resize(width: Int, height: Int) {
