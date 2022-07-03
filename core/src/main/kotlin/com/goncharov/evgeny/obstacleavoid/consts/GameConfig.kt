@@ -16,5 +16,3 @@ const val START_PLAYER_Y = 1 - PLAYER_SIZE / 2f
 const val MAX_PLAYER_X_SPEED = 0.25f
 
 const val SCORE_MAX_TIME = 1.25f
-
-const val DEBUG = true

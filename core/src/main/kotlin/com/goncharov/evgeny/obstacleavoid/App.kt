@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.goncharov.evgeny.obstacleavoid.consts.DEBUG
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 import com.goncharov.evgeny.obstacleavoid.screens.game.GameScreen
@@ -30,9 +29,7 @@ class App : Game(), Navigation {
     }
 
     override fun create() {
-        if (DEBUG) {
-            Gdx.app.logLevel = Application.LOG_DEBUG
-        }
+        Gdx.app.logLevel = Application.LOG_DEBUG
         LogDebugUtils.debug(
             "App",
             "${FormatUtils.dateFormat.format(FormatUtils.calendar.time)} start application"

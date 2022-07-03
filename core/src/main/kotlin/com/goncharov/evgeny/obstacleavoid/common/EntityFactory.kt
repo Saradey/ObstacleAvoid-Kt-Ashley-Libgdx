@@ -1,7 +1,7 @@
 package com.goncharov.evgeny.obstacleavoid.common
 
+import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
-import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.goncharov.evgeny.obstacleavoid.components.*
@@ -9,7 +9,7 @@ import com.goncharov.evgeny.obstacleavoid.consts.*
 
 
 class EntityFactory(
-    private val engine: PooledEngine,
+    private val engine: Engine,
     assetManager: AssetManager
 ) {
 
