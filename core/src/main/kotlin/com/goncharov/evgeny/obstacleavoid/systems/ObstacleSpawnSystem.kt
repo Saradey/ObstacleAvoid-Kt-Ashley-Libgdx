@@ -8,6 +8,9 @@ import com.goncharov.evgeny.obstacleavoid.consts.OBSTACLE_SPAWN_TIME
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_WIDTH
 
+/**
+ * Система спавна противника
+ */
 class ObstacleSpawnSystem(
     private val factory: EntityFactory
 ) : IntervalSystem(
