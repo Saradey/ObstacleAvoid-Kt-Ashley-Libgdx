@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.goncharov.evgeny.obstacleavoid.common.BaseStageScreen
 import com.goncharov.evgeny.obstacleavoid.common.addListenerKtx
-import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors
+import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.GAME_PLAY_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.consts.BACKGROUND
 import com.goncharov.evgeny.obstacleavoid.consts.PANEL
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
@@ -23,7 +23,7 @@ class MenuScreen(
 
     override fun initUi(): Actor {
         val table = Table()
-        val gamePlayAtlas = assetManager[AssetDescriptors.GAME_PLAY_DESCRIPTOR]
+        val gamePlayAtlas = assetManager[GAME_PLAY_DESCRIPTOR]
         table.background = TextureRegionDrawable(gamePlayAtlas.findRegion(BACKGROUND))
 
         val playButton = TextButton("PLAY", uiSkin)
