@@ -23,7 +23,7 @@ class MovementSystem : IteratingSystem(
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
-        if (!gameComponent.gameIsPause) {
+        if (!gameComponent.gameIsPause && !gameComponent.gameIsOver()) {
             val position = Mappers.position[entity]
             val movement = Mappers.movement[entity]
             position.x += movement.xSpeed

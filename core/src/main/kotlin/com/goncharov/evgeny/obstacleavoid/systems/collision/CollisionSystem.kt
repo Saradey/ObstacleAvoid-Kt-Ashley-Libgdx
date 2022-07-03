@@ -33,7 +33,7 @@ class CollisionSystem(
     private val sound = assetManager[AssetDescriptors.HIT_SOUND_DESCRIPTOR]
 
     override fun update(deltaTime: Float) {
-        if (!gm.gameIsPause) {
+        if (!gm.gameIsPause && !gm.gameIsOver()) {
             val players = engine.getEntitiesFor(playerFamily).first()
             val obstacles = engine.getEntitiesFor(obstacleFamily)
             obstacles.forEach { obstacle ->

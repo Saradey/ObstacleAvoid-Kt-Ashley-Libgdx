@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.GlyphLayout
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.viewport.Viewport
+import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
+import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 
 class UiRenderSystem(
@@ -17,6 +19,10 @@ class UiRenderSystem(
 ) : EntitySystem() {
 
     private val layout = GlyphLayout()
+
+    private val gm by lazy {
+        Mappers.game[engine.getEntitiesFor(gameManagerFamily).first()]
+    }
 
     override fun update(deltaTime: Float) {
         uiViewport.apply()
@@ -34,10 +40,21 @@ class UiRenderSystem(
         val scoreText = SCORE_TEXT.format(GameManager.score)
         layout.setText(font, scoreText)
         font.draw(batch, scoreText, UI_WIDTH - layout.width - 20f, UI_HEIGHT - layout.height)
+        if (gm.gameIsOver()) {
+            layout.setText(font, OVER_GAME_TEXT)
+            font.color = Color.RED
+            font.draw(
+                batch,
+                OVER_GAME_TEXT,
+                (UI_WIDTH - layout.width) / 2f,
+                (UI_HEIGHT - layout.height) / 2f
+            )
+        }
     }
 
     companion object {
         private const val LIVE_TEXT = "LIVES: %d"
         private const val SCORE_TEXT = "SCORE: %d"
+        private const val OVER_GAME_TEXT = "GAME OVER"
     }
 }
