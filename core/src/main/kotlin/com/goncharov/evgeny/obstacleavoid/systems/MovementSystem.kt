@@ -7,6 +7,9 @@ import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.components.MovementComponent
 import com.goncharov.evgeny.obstacleavoid.components.PositionComponent
 
+/**
+ * Система движения объектов
+ */
 class MovementSystem : IteratingSystem(
     Family.all(
         PositionComponent::class.java,

@@ -10,6 +10,9 @@ import com.goncharov.evgeny.obstacleavoid.components.MovementComponent
 import com.goncharov.evgeny.obstacleavoid.components.PlayerComponent
 import com.goncharov.evgeny.obstacleavoid.consts.MAX_PLAYER_X_SPEED
 
+/**
+ * Система управления игроком
+ */
 class PlayerSystem : IteratingSystem(
     Family.all(
         PlayerComponent::class.java,

@@ -105,6 +105,6 @@ class GameScreen(
     }
 
     companion object {
-        private const val DEBUG = false
+        private const val DEBUG = true
     }
 }

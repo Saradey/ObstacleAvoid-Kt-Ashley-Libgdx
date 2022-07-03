@@ -10,6 +10,9 @@ import com.goncharov.evgeny.obstacleavoid.components.DimensionComponent
 import com.goncharov.evgeny.obstacleavoid.components.PositionComponent
 import com.goncharov.evgeny.obstacleavoid.components.WorldWrapComponent
 
+/**
+ * Систем ограничивающие выход объектов за карту
+ */
 class WorldWrapSystem(
     private val viewport: Viewport
 ) : IteratingSystem(
