@@ -11,6 +11,7 @@ class GameManagerComponent : Component {
     var score = 0
     var lives = LIVES_START
     var reset = false
+    var displayScore = 0
 
     fun gameIsOver() = lives <= 0
 }

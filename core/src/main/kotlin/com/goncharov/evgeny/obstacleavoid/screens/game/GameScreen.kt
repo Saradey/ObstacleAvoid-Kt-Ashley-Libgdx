@@ -49,6 +49,7 @@ class GameScreen(
         engine.addSystem(CollisionSystem(assetManager))
         engine.addSystem(GameOverSystem(navigation, factory, savedManagers))
         engine.addSystem(ScoreSystem())
+        engine.addSystem(DisplayScoreUpdateSystem())
         engine.addSystem(RenderSystem(gameViewport, batch))
         engine.addSystem(UiRenderSystem(font, uiViewport, batch))
         //debug

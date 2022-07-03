@@ -39,7 +39,7 @@ class UiRenderSystem(
         layout.setText(font, liveText)
         font.color = Color.WHITE
         font.draw(batch, liveText, 20f, UI_HEIGHT - layout.height)
-        val scoreText = SCORE_TEXT.format(gameComponent.score)
+        val scoreText = SCORE_TEXT.format(gameComponent.displayScore)
         layout.setText(font, scoreText)
         font.draw(batch, scoreText, UI_WIDTH - layout.width - 20f, UI_HEIGHT - layout.height)
         if (gameComponent.gameIsOver()) {
