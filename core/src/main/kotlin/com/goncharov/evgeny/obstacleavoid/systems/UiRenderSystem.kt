@@ -11,6 +11,9 @@ import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
+/**
+ * Система отрисовки ui во время игры
+ */
 class UiRenderSystem(
     private val font: BitmapFont,
     private val uiViewport: Viewport,
@@ -19,7 +22,7 @@ class UiRenderSystem(
 
     private val layout = GlyphLayout()
 
-    private val gm by lazy {
+    private val gameComponent by lazy {
         Mappers.game[engine.getEntitiesFor(gameManagerFamily).first()]
     }
 
@@ -32,14 +35,14 @@ class UiRenderSystem(
     }
 
     private fun draw() {
-        val liveText = LIVE_TEXT.format(gm.lives)
+        val liveText = LIVE_TEXT.format(gameComponent.lives)
         layout.setText(font, liveText)
         font.color = Color.WHITE
         font.draw(batch, liveText, 20f, UI_HEIGHT - layout.height)
-        val scoreText = SCORE_TEXT.format(gm.score)
+        val scoreText = SCORE_TEXT.format(gameComponent.score)
         layout.setText(font, scoreText)
         font.draw(batch, scoreText, UI_WIDTH - layout.width - 20f, UI_HEIGHT - layout.height)
-        if (gm.gameIsOver()) {
+        if (gameComponent.gameIsOver()) {
             layout.setText(font, OVER_GAME_TEXT)
             font.color = Color.RED
             font.draw(

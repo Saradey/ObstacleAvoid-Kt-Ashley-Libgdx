@@ -10,17 +10,20 @@ import com.goncharov.evgeny.obstacleavoid.consts.WORLD_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
+/**
+ * Система отрисовки сетки во время игры
+ */
 class GridRenderSystem(
     private val gameViewport: Viewport,
     private val renderer: ShapeRenderer
 ) : EntitySystem() {
 
-    private val debug by lazy {
+    private val debugComponent by lazy {
         Mappers.debug[engine.getEntitiesFor(gameManagerFamily).first()]
     }
 
     override fun update(deltaTime: Float) {
-        if (debug.renderDebug) {
+        if (debugComponent.renderDebug) {
             gameViewport.apply()
             renderer.projectionMatrix = gameViewport.camera.combined
             renderer.begin(ShapeRenderer.ShapeType.Line)

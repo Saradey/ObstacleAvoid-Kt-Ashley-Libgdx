@@ -9,6 +9,9 @@ import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_WIDTH
 
+/**
+ * Система управления игровой камерой
+ */
 class DebugGameCameraSystem(
     private val gameCamera: OrthographicCamera,
 ) : EntitySystem() {

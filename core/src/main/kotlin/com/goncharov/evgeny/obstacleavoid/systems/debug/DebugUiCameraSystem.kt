@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 
+/**
+ * Система передвижения ui камеры
+ */
 class DebugUiCameraSystem(
     private val uiCamera: OrthographicCamera,
 ) : EntitySystem() {

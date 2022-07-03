@@ -11,18 +11,21 @@ import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
+/**
+ * Система отрисовки фпс
+ */
 class FpsMonitorSystem(
     private val batch: SpriteBatch,
     private val fpsFont: BitmapFont,
     private val uiViewport: Viewport
 ) : EntitySystem() {
 
-    private val debug by lazy {
+    private val debugComponent by lazy {
         Mappers.debug[engine.getEntitiesFor(gameManagerFamily).first()]
     }
 
     override fun update(deltaTime: Float) {
-        if (debug.renderFps) {
+        if (debugComponent.renderFps) {
             when {
                 Gdx.graphics.displayMode.refreshRate / 3 > Gdx.graphics.framesPerSecond -> {
                     fpsFont.color = Color.RED

@@ -20,3 +20,5 @@ const val SCORE_MAX_TIME = 1.25f
 const val HIGH_SCORE_KEY = "highscore"
 const val DIFFICULTY_KEY = "difficulty"
 const val PREFS_NAME = "obstacleAvoidPref"
+
+const val FPS_LIMIT = 60

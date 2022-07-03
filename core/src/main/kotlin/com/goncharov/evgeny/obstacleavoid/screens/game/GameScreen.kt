@@ -9,16 +9,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.goncharov.evgeny.obstacleavoid.common.BaseScreen
 import com.goncharov.evgeny.obstacleavoid.common.EntityFactory
-import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.*
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.FONT_DESCRIPTOR
-import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.HIT_SOUND_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.managers.SavedManagers
-import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 import com.goncharov.evgeny.obstacleavoid.systems.*
-import com.goncharov.evgeny.obstacleavoid.systems.collision.CollisionListener
-import com.goncharov.evgeny.obstacleavoid.systems.collision.CollisionSystem
+import com.goncharov.evgeny.obstacleavoid.systems.CollisionSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugGameCameraSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugRenderSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.FpsMonitorSystem

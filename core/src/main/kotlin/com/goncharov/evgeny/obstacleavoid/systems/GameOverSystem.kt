@@ -11,13 +11,16 @@ import com.goncharov.evgeny.obstacleavoid.managers.SavedManagers
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 
+/**
+ * Система завершения игры
+ */
 class GameOverSystem(
     private val navigation: Navigation,
     private val factory: EntityFactory,
     private val savedManagers: SavedManagers
 ) : EntitySystem() {
 
-    private val gm by lazy {
+    private val gameComponent by lazy {
         Mappers.game[engine.getEntitiesFor(gameManagerFamily).first()]
     }
     private var isOverTime = 0f
@@ -27,16 +30,16 @@ class GameOverSystem(
     ).get()
 
     override fun update(deltaTime: Float) {
-        if (gm.gameIsOver()) {
+        if (gameComponent.gameIsOver()) {
             isOverTime += deltaTime
             if (isOverTime > GAME_IS_OVER_PAUSE) {
                 savedManagers.savedHighScoreScore()
                 navigation.navigate(KeyNavigation.MenuKey)
             }
         }
-        if (gm.reset && !gm.gameIsOver()) {
+        if (gameComponent.reset && !gameComponent.gameIsOver()) {
             engine.removeAllEntities(removeFamily)
-            gm.reset = false
+            gameComponent.reset = false
             addEntities()
         }
     }

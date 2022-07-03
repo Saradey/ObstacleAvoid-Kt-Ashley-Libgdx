@@ -6,6 +6,9 @@ import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.SCORE_MAX_TIME
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
+/**
+ * Система подсчета score
+ */
 class ScoreSystem : IntervalSystem(
     SCORE_MAX_TIME
 ) {

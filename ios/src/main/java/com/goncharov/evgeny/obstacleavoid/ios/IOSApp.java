@@ -1,5 +1,7 @@
 package com.goncharov.evgeny.obstacleavoid.ios;
 
+import static com.goncharov.evgeny.obstacleavoid.consts.GameConfigKt.FPS_LIMIT;
+
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 
@@ -15,6 +17,7 @@ public class IOSApp extends IOSApplication.Delegate {
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration configuration = new IOSApplicationConfiguration();
         configuration.orientationPortrait = true;
+        configuration.preferredFramesPerSecond = FPS_LIMIT;
         return new IOSApplication(new App(), configuration);
     }
 

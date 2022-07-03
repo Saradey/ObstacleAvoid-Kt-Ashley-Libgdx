@@ -12,6 +12,9 @@ import com.goncharov.evgeny.obstacleavoid.components.PositionComponent
 import com.goncharov.evgeny.obstacleavoid.components.TextureComponent
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
+/**
+ * Система отрисовки всех игровых объектов
+ */
 class RenderSystem(
     private val gameViewport: Viewport,
     private val batch: SpriteBatch
@@ -23,12 +26,12 @@ class RenderSystem(
         DimensionComponent::class.java
     ).get()
 
-    private val debug by lazy {
+    private val debugComponent by lazy {
         Mappers.debug[engine.getEntitiesFor(gameManagerFamily).first()]
     }
 
     override fun update(deltaTime: Float) {
-        if (debug.drawTexture) {
+        if (debugComponent.drawTexture) {
             gameViewport.apply()
             batch.projectionMatrix = gameViewport.camera.combined
             batch.begin()
