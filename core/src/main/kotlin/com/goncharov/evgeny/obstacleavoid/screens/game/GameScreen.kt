@@ -105,8 +105,4 @@ class GameScreen(
         factory.addBackground()
         factory.addPlayer()
     }
-
-    companion object {
-        private const val DEBUG = true
-    }
 }
