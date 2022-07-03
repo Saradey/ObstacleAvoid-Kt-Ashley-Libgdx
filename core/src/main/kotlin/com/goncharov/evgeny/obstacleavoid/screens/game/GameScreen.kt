@@ -76,7 +76,7 @@ class GameScreen(
         engine.addSystem(GridRenderSystem(gameViewport, shapeRenderer))
         engine.addSystem(DebugRenderSystem(gameViewport, shapeRenderer))
         engine.addSystem(FpsMonitorSystem(batch, font, uiViewport))
-        Gdx.input.inputProcessor = this
+        Gdx.input.inputProcessor = GameController(engine)
     }
 
     override fun render(delta: Float) {
@@ -100,27 +100,6 @@ class GameScreen(
 
     override fun dispose() {
         Gdx.input.inputProcessor = null
-    }
-
-    override fun keyDown(keycode: Int): Boolean {
-        when (keycode) {
-            Input.Keys.C -> {
-                val entity = engine.getEntitiesFor(gameManagerFamily).first()
-                val debugComponent = Mappers.debug[entity]
-                debugComponent.renderDebug = !debugComponent.renderDebug
-            }
-            Input.Keys.B -> {
-                val entity = engine.getEntitiesFor(gameManagerFamily).first()
-                val debugComponent = Mappers.debug[entity]
-                debugComponent.renderFps = !debugComponent.renderFps
-            }
-            Input.Keys.SPACE -> {
-                val entity = engine.getEntitiesFor(gameManagerFamily).first()
-                val gameComponent = Mappers.game[entity]
-                gameComponent.gameIsPause = !gameComponent.gameIsPause
-            }
-        }
-        return true
     }
 
     private fun addEntities() {
