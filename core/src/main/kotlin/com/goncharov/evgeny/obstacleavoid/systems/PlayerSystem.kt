@@ -24,11 +24,11 @@ class PlayerSystem : IteratingSystem(
         val movement = Mappers.movement[entity]
         movement.xSpeed = 0f
         when {
-            Gdx.input.isKeyPressed(Input.Keys.RIGHT) -> {
-                movement.xSpeed = MAX_PLAYER_X_SPEED
-            }
-            Gdx.input.isKeyPressed(Input.Keys.LEFT) -> {
+            Gdx.input.isKeyPressed(Input.Keys.A) -> {
                 movement.xSpeed = -MAX_PLAYER_X_SPEED
+            }
+            Gdx.input.isKeyPressed(Input.Keys.D) -> {
+                movement.xSpeed = MAX_PLAYER_X_SPEED
             }
         }
     }
