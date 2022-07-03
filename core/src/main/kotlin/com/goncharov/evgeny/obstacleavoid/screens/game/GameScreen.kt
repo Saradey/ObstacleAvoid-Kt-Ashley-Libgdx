@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.goncharov.evgeny.obstacleavoid.common.BaseScreen
 import com.goncharov.evgeny.obstacleavoid.common.EntityFactory
+import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.*
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.FONT_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.HIT_SOUND_DESCRIPTOR
@@ -27,7 +28,7 @@ import com.goncharov.evgeny.obstacleavoid.util.GdxUtils
 
 class GameScreen(
     assetManager: AssetManager,
-    private val shapeRenderer: ShapeRenderer,
+    shapeRenderer: ShapeRenderer,
     private val batch: SpriteBatch,
     private val navigation: Navigation,
 ) : BaseScreen() {
@@ -52,6 +53,7 @@ class GameScreen(
 
     override fun show() {
         debug("show")
+        addEntities()
         val listener = object : CollisionListener {
             override fun hitObstacle() {
                 GameManager.decrementLives()
@@ -75,7 +77,6 @@ class GameScreen(
         engine.addSystem(RenderSystem(gameViewport, batch))
         engine.addSystem(UiRenderSystem(font, uiViewport, batch))
         engine.addSystem(DebugGameCameraSystem(gameCamera))
-        addEntities()
         Gdx.input.inputProcessor = this
     }
 
@@ -120,6 +121,11 @@ class GameScreen(
                     engine.addSystem(fpsMonitorSystem)
                 }
             }
+            Input.Keys.SPACE -> {
+                val entity = engine.getEntitiesFor(gameManagerFamily).first()
+                val gameComponent = Mappers.game[entity]
+                gameComponent.gameIsPause = !gameComponent.gameIsPause
+            }
         }
         return true
     }
@@ -127,5 +133,6 @@ class GameScreen(
     private fun addEntities() {
         factory.addBackground()
         factory.addPlayer()
+        factory.addGameManager()
     }
 }

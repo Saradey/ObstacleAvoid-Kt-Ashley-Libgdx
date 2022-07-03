@@ -11,7 +11,7 @@ import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 
 class EntityFactory(
     private val engine: PooledEngine,
-    private val assetManager: AssetManager
+    assetManager: AssetManager
 ) {
 
     private val gamePlayAtlas: TextureAtlas = assetManager[GAME_PLAY]
@@ -80,6 +80,13 @@ class EntityFactory(
         entity.add(texture)
         entity.add(position)
         entity.add(dimension)
+        engine.addEntity(entity)
+    }
+
+    fun addGameManager() {
+        val gameManagerComponent = engine.createComponent(GameManagerComponent::class.java)
+        val entity = engine.createEntity()
+        entity.add(gameManagerComponent)
         engine.addEntity(entity)
     }
 }

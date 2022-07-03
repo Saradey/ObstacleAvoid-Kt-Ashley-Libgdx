@@ -7,6 +7,7 @@ import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.components.BoundsComponent
 import com.goncharov.evgeny.obstacleavoid.components.ObstacleComponent
 import com.goncharov.evgeny.obstacleavoid.components.PlayerComponent
+import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
 class CollisionSystem(
     private val listener: CollisionListener
@@ -22,16 +23,22 @@ class CollisionSystem(
         BoundsComponent::class.java
     ).get()
 
+    private val gameComponent by lazy {
+        Mappers.game[engine.getEntitiesFor(gameManagerFamily).first()]
+    }
+
     override fun update(deltaTime: Float) {
-        val players = engine.getEntitiesFor(playerFamily).first()
-        val obstacles = engine.getEntitiesFor(obstacleFamily)
-        obstacles.forEach { obstacle ->
-            val component = Mappers.obstacle[obstacle]
-            if (component.hit) {
-                return@forEach
-            }
-            if (checkCollision(players, obstacle)) {
-                listener.hitObstacle()
+        if (!gameComponent.gameIsPause) {
+            val players = engine.getEntitiesFor(playerFamily).first()
+            val obstacles = engine.getEntitiesFor(obstacleFamily)
+            obstacles.forEach { obstacle ->
+                val component = Mappers.obstacle[obstacle]
+                if (component.hit) {
+                    return@forEach
+                }
+                if (checkCollision(players, obstacle)) {
+                    listener.hitObstacle()
+                }
             }
         }
     }

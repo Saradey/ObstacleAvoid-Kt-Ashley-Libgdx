@@ -16,4 +16,6 @@ object Mappers {
         ComponentMapper.getFor(TextureComponent::class.java)
     val dimension: ComponentMapper<DimensionComponent> =
         ComponentMapper.getFor(DimensionComponent::class.java)
+    val game: ComponentMapper<GameManagerComponent> =
+        ComponentMapper.getFor(GameManagerComponent::class.java)
 }
