@@ -2,7 +2,6 @@ package com.goncharov.evgeny.obstacleavoid.screens.game
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -10,7 +9,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.goncharov.evgeny.obstacleavoid.common.BaseScreen
 import com.goncharov.evgeny.obstacleavoid.common.EntityFactory
-import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.*
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.FONT_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.HIT_SOUND_DESCRIPTOR
@@ -27,7 +25,7 @@ import com.goncharov.evgeny.obstacleavoid.systems.debug.GridRenderSystem
 import com.goncharov.evgeny.obstacleavoid.util.GdxUtils
 
 class GameScreen(
-    assetManager: AssetManager,
+    private val assetManager: AssetManager,
     private val shapeRenderer: ShapeRenderer,
     private val batch: SpriteBatch,
     private val navigation: Navigation,
@@ -45,10 +43,9 @@ class GameScreen(
 
     private var reset = false
 
-    private val font = assetManager[FONT_DESCRIPTOR]
-
     override fun show() {
         debug("show")
+        val font = assetManager[FONT_DESCRIPTOR]
         addEntities()
         val listener = object : CollisionListener {
             override fun hitObstacle() {
@@ -62,7 +59,7 @@ class GameScreen(
                 }
             }
         }
-        engine.addSystem(PlayerSystem())
+        engine.addSystem(PlayerControlSystem(gameViewport))
         engine.addSystem(MovementSystem())
         engine.addSystem(WorldWrapSystem(gameViewport))
         engine.addSystem(BoundsSystem())
@@ -72,6 +69,7 @@ class GameScreen(
         engine.addSystem(ScoreSystem())
         engine.addSystem(RenderSystem(gameViewport, batch))
         engine.addSystem(UiRenderSystem(font, uiViewport, batch))
+        //debug
         engine.addSystem(DebugGameCameraSystem(gameCamera))
         engine.addSystem(GridRenderSystem(gameViewport, shapeRenderer))
         engine.addSystem(DebugRenderSystem(gameViewport, shapeRenderer))

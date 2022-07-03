@@ -5,16 +5,23 @@ import com.badlogic.ashley.core.Family
 import com.badlogic.ashley.systems.IteratingSystem
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
+import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.utils.viewport.Viewport
 import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.components.MovementComponent
 import com.goncharov.evgeny.obstacleavoid.components.PlayerComponent
 import com.goncharov.evgeny.obstacleavoid.consts.MAX_PLAYER_X_SPEED
+import com.goncharov.evgeny.obstacleavoid.consts.WORLD_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
+import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 
 /**
  * Система управления игроком
  */
-class PlayerSystem : IteratingSystem(
+class PlayerControlSystem(
+    private val gameViewport: Viewport
+) : IteratingSystem(
     Family.all(
         PlayerComponent::class.java,
         MovementComponent::class.java
@@ -34,6 +41,17 @@ class PlayerSystem : IteratingSystem(
                 }
                 Gdx.input.isKeyPressed(Input.Keys.D) -> {
                     movement.xSpeed = MAX_PLAYER_X_SPEED
+                }
+                Gdx.input.isTouched && !GameManager.isGameOver() -> {
+                    val worldTouch = gameViewport.unproject(
+                        Vector2(
+                            Gdx.input.x.toFloat(),
+                            Gdx.input.y.toFloat()
+                        )
+                    )
+                    val position = Mappers.position[entity]
+                    val dimension = Mappers.dimension[entity]
+                    position.x = MathUtils.clamp(worldTouch.x, 0f, WORLD_WIDTH - dimension.width)
                 }
             }
         }
