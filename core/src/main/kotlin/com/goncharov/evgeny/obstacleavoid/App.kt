@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors
+import com.goncharov.evgeny.obstacleavoid.consts.DEBUG
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 import com.goncharov.evgeny.obstacleavoid.screens.game.GameScreen
@@ -15,10 +15,8 @@ import com.goncharov.evgeny.obstacleavoid.screens.menu.HighScoreScreen
 import com.goncharov.evgeny.obstacleavoid.screens.menu.MenuScreen
 import com.goncharov.evgeny.obstacleavoid.screens.menu.OptionsScreen
 import com.goncharov.evgeny.obstacleavoid.util.FormatUtils
-import com.goncharov.evgeny.obstacleavoid.util.FpsMonitorManager
-import com.goncharov.evgeny.obstacleavoid.util.debug.DebugDrawingFps
 
-class App : Game(), Navigation, FpsMonitorManager {
+class App : Game(), Navigation {
 
     private val batch by lazy {
         SpriteBatch()
@@ -29,32 +27,16 @@ class App : Game(), Navigation, FpsMonitorManager {
     private val debugRender by lazy {
         ShapeRenderer()
     }
-    private var drawingFps = false
 
     override fun create() {
-        assetManager.load(AssetDescriptors.FPS_FONT_DESCRIPTOR)
-        assetManager.finishLoading()
-        Gdx.app.logLevel = Application.LOG_DEBUG
+        if (DEBUG) {
+            Gdx.app.logLevel = Application.LOG_DEBUG
+        }
         Gdx.app.debug(
             "App",
             "${FormatUtils.dateFormat.format(FormatUtils.calendar.time)} start application"
         )
         navigate(KeyNavigation.LoadingKey)
-    }
-
-    override fun render() {
-        super.render()
-        if (drawingFps) {
-            DebugDrawingFps.drawFpsMonitor(
-                batch,
-                assetManager[AssetDescriptors.FPS_FONT_DESCRIPTOR]
-            )
-        }
-    }
-
-    override fun resize(width: Int, height: Int) {
-        DebugDrawingFps.resize(width, height)
-        super.resize(width, height)
     }
 
     override fun dispose() {
@@ -73,21 +55,17 @@ class App : Game(), Navigation, FpsMonitorManager {
                 LoadingScreen(assetManager, debugRender, this)
             )
             KeyNavigation.MenuKey -> setScreen(
-                MenuScreen(this, assetManager, batch, this)
+                MenuScreen(this, assetManager, batch)
             )
             KeyNavigation.GameKey -> setScreen(
                 GameScreen(assetManager, debugRender, batch, this)
             )
             KeyNavigation.HighScoreKey -> setScreen(
-                HighScoreScreen(this, assetManager, batch, this)
+                HighScoreScreen(this, assetManager, batch)
             )
             KeyNavigation.OptionsKey -> setScreen(
-                OptionsScreen(this, assetManager, batch, this)
+                OptionsScreen(this, assetManager, batch)
             )
         }
-    }
-
-    override fun updateFpsMonitor() {
-        drawingFps = !drawingFps
     }
 }

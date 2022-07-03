@@ -14,14 +14,12 @@ import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 import com.goncharov.evgeny.obstacleavoid.managers.models.DifficultyLevel
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
-import com.goncharov.evgeny.obstacleavoid.util.FpsMonitorManager
 
 class OptionsScreen(
     navigation: Navigation,
     assetManager: AssetManager,
     batch: SpriteBatch,
-    fpsMonitorManager: FpsMonitorManager
-) : BaseStageScreen(navigation, assetManager, batch, fpsMonitorManager) {
+) : BaseStageScreen(navigation, assetManager, batch) {
 
     private var group: ButtonGroup<CheckBox>? = null
 

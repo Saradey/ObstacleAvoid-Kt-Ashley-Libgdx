@@ -14,7 +14,6 @@ import com.goncharov.evgeny.obstacleavoid.consts.*
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.FONT_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.GAME_PLAY_DESCRIPTOR
 import com.goncharov.evgeny.obstacleavoid.util.GdxUtils
-import com.goncharov.evgeny.obstacleavoid.util.debug.DebugCameraController
 
 class GameRender(
     private val renderer: ShapeRenderer,
@@ -34,7 +33,6 @@ class GameRender(
     private val backgroundRegion = gamePlayAtlas.findRegion(BACKGROUND)
 
     fun render() {
-        DebugCameraController.updateCamera(camera)
         touchedUpdate()
         GdxUtils.clearScreen()
         renderGamePlay()

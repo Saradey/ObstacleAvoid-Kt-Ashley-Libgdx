@@ -22,7 +22,6 @@ import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugCameraSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugRenderSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.FpsMonitorSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.GridRenderSystem
-import com.goncharov.evgeny.obstacleavoid.util.FpsMonitorManager
 import com.goncharov.evgeny.obstacleavoid.util.GdxUtils
 
 class GameScreen(

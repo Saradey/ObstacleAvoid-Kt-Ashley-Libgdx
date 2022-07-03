@@ -15,14 +15,12 @@ import com.goncharov.evgeny.obstacleavoid.consts.PANEL
 import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
-import com.goncharov.evgeny.obstacleavoid.util.FpsMonitorManager
 
 class HighScoreScreen(
     navigation: Navigation,
     assetManager: AssetManager,
     batch: SpriteBatch,
-    fpsMonitorManager: FpsMonitorManager
-) : BaseStageScreen(navigation, assetManager, batch, fpsMonitorManager) {
+) : BaseStageScreen(navigation, assetManager, batch) {
 
     override fun initUi(): Actor {
         val table = Table()
