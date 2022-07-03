@@ -16,6 +16,7 @@ import com.goncharov.evgeny.obstacleavoid.consts.DEBUG
 import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
+import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugUiCameraSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.FpsMonitorSystem
 import com.goncharov.evgeny.obstacleavoid.util.GdxUtils
 
@@ -39,6 +40,7 @@ abstract class BaseStageScreen(
         stage.addActor(initUi())
         if (DEBUG) {
             engine.addSystem(FpsMonitorSystem(batch, assetManager[FONT_DESCRIPTOR], viewport))
+            engine.addSystem(DebugUiCameraSystem(camera))
             stage.isDebugAll = true
         }
     }

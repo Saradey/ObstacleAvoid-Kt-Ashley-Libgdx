@@ -18,7 +18,7 @@ import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 import com.goncharov.evgeny.obstacleavoid.systems.*
 import com.goncharov.evgeny.obstacleavoid.systems.collision.CollisionListener
 import com.goncharov.evgeny.obstacleavoid.systems.collision.CollisionSystem
-import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugCameraSystem
+import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugGameCameraSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugRenderSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.FpsMonitorSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.GridRenderSystem
@@ -71,7 +71,7 @@ class GameScreen(
         if (DEBUG) {
             engine.addSystem(GridRenderSystem(gameViewport, shapeRenderer))
             engine.addSystem(DebugRenderSystem(gameViewport, shapeRenderer))
-            engine.addSystem(DebugCameraSystem(gameCamera))
+            engine.addSystem(DebugGameCameraSystem(gameCamera))
             engine.addSystem(FpsMonitorSystem(batch, font, uiViewport))
         }
         addEntities()

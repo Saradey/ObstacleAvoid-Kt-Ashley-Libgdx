@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.WORLD_WIDTH
-import com.goncharov.evgeny.obstacleavoid.screens.game.GameRender
 
 class GridRenderSystem(
     private val gameViewport: Viewport,

@@ -15,6 +15,7 @@ import com.goncharov.evgeny.obstacleavoid.screens.menu.HighScoreScreen
 import com.goncharov.evgeny.obstacleavoid.screens.menu.MenuScreen
 import com.goncharov.evgeny.obstacleavoid.screens.menu.OptionsScreen
 import com.goncharov.evgeny.obstacleavoid.util.FormatUtils
+import com.goncharov.evgeny.obstacleavoid.util.LogDebugUtils
 
 class App : Game(), Navigation {
 
@@ -32,7 +33,7 @@ class App : Game(), Navigation {
         if (DEBUG) {
             Gdx.app.logLevel = Application.LOG_DEBUG
         }
-        Gdx.app.debug(
+        LogDebugUtils.debug(
             "App",
             "${FormatUtils.dateFormat.format(FormatUtils.calendar.time)} start application"
         )
@@ -42,7 +43,7 @@ class App : Game(), Navigation {
     override fun dispose() {
         batch.dispose()
         assetManager.dispose()
-        Gdx.app.debug(
+        LogDebugUtils.debug(
             "App",
             "${FormatUtils.dateFormat.format(FormatUtils.calendar.time)} dispose"
         )
