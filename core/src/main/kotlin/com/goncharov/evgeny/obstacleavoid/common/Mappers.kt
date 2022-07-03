@@ -18,4 +18,6 @@ object Mappers {
         ComponentMapper.getFor(DimensionComponent::class.java)
     val game: ComponentMapper<GameManagerComponent> =
         ComponentMapper.getFor(GameManagerComponent::class.java)
+    val debug: ComponentMapper<DebugComponent> =
+        ComponentMapper.getFor(DebugComponent::class.java)
 }

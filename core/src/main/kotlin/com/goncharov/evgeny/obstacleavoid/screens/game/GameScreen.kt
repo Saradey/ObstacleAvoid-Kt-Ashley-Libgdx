@@ -28,7 +28,7 @@ import com.goncharov.evgeny.obstacleavoid.util.GdxUtils
 
 class GameScreen(
     assetManager: AssetManager,
-    shapeRenderer: ShapeRenderer,
+    private val shapeRenderer: ShapeRenderer,
     private val batch: SpriteBatch,
     private val navigation: Navigation,
 ) : BaseScreen() {
@@ -46,10 +46,6 @@ class GameScreen(
     private var reset = false
 
     private val font = assetManager[FONT_DESCRIPTOR]
-
-    private val gridRenderSystem = GridRenderSystem(gameViewport, shapeRenderer)
-    private val fpsMonitorSystem = FpsMonitorSystem(batch, font, uiViewport)
-    private val debugRenderSystem = DebugRenderSystem(gameViewport, shapeRenderer)
 
     override fun show() {
         debug("show")
@@ -77,6 +73,9 @@ class GameScreen(
         engine.addSystem(RenderSystem(gameViewport, batch))
         engine.addSystem(UiRenderSystem(font, uiViewport, batch))
         engine.addSystem(DebugGameCameraSystem(gameCamera))
+        engine.addSystem(GridRenderSystem(gameViewport, shapeRenderer))
+        engine.addSystem(DebugRenderSystem(gameViewport, shapeRenderer))
+        engine.addSystem(FpsMonitorSystem(batch, font, uiViewport))
         Gdx.input.inputProcessor = this
     }
 
@@ -106,20 +105,14 @@ class GameScreen(
     override fun keyDown(keycode: Int): Boolean {
         when (keycode) {
             Input.Keys.C -> {
-                if (engine.systems.contains(gridRenderSystem, true)) {
-                    engine.removeSystem(gridRenderSystem)
-                    engine.removeSystem(debugRenderSystem)
-                } else {
-                    engine.addSystem(gridRenderSystem)
-                    engine.addSystem(debugRenderSystem)
-                }
+                val entity = engine.getEntitiesFor(gameManagerFamily).first()
+                val debugComponent = Mappers.debug[entity]
+                debugComponent.renderDebug = !debugComponent.renderDebug
             }
             Input.Keys.B -> {
-                if (engine.systems.contains(gridRenderSystem, true)) {
-                    engine.removeSystem(fpsMonitorSystem)
-                } else {
-                    engine.addSystem(fpsMonitorSystem)
-                }
+                val entity = engine.getEntitiesFor(gameManagerFamily).first()
+                val debugComponent = Mappers.debug[entity]
+                debugComponent.renderFps = !debugComponent.renderFps
             }
             Input.Keys.SPACE -> {
                 val entity = engine.getEntitiesFor(gameManagerFamily).first()

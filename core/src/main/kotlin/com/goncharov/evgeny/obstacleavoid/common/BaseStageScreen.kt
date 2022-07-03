@@ -39,9 +39,9 @@ abstract class BaseStageScreen(
         Gdx.input.inputProcessor = inputMultiplexer
         stage.addActor(initUi())
         if (DEBUG) {
-            engine.addSystem(FpsMonitorSystem(batch, assetManager[FONT_DESCRIPTOR], viewport))
-            engine.addSystem(DebugUiCameraSystem(camera))
-            stage.isDebugAll = true
+//            engine.addSystem(FpsMonitorSystem(batch, assetManager[FONT_DESCRIPTOR], viewport))
+//            engine.addSystem(DebugUiCameraSystem(camera))
+//            stage.isDebugAll = true
         }
     }
 

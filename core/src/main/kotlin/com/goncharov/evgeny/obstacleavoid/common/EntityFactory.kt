@@ -86,6 +86,8 @@ class EntityFactory(
     fun addGameManager() {
         val gameManagerComponent = engine.createComponent(GameManagerComponent::class.java)
         val entity = engine.createEntity()
+        val debugComponent = engine.createComponent(DebugComponent::class.java)
+        entity.add(debugComponent)
         entity.add(gameManagerComponent)
         engine.addEntity(entity)
     }

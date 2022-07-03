@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.utils.viewport.Viewport
 import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.components.BoundsComponent
+import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
 
 class DebugRenderSystem(
     private val gameViewport: Viewport,
@@ -16,13 +17,19 @@ class DebugRenderSystem(
     Family.all(BoundsComponent::class.java).get()
 ) {
 
+    private val debug by lazy {
+        Mappers.debug[engine.getEntitiesFor(gameManagerFamily).first()]
+    }
+
     override fun update(deltaTime: Float) {
-        gameViewport.apply()
-        renderer.projectionMatrix = gameViewport.camera.combined
-        renderer.begin(ShapeRenderer.ShapeType.Line)
-        renderer.color = Color.RED
-        super.update(deltaTime)
-        renderer.end()
+        if (debug.renderDebug) {
+            gameViewport.apply()
+            renderer.projectionMatrix = gameViewport.camera.combined
+            renderer.begin(ShapeRenderer.ShapeType.Line)
+            renderer.color = Color.RED
+            super.update(deltaTime)
+            renderer.end()
+        }
     }
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
