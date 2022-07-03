@@ -34,7 +34,7 @@ class FpsMonitorSystem(
             batch,
             FPS.format(Gdx.graphics.framesPerSecond),
             UI_WIDTH - 110f,
-            UI_HEIGHT - 40f
+            UI_HEIGHT - 60f
         )
         batch.end()
     }
