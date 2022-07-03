@@ -2,6 +2,7 @@ package com.goncharov.evgeny.obstacleavoid.screens.game
 
 import com.badlogic.ashley.core.PooledEngine
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
@@ -25,7 +26,7 @@ import com.goncharov.evgeny.obstacleavoid.systems.debug.GridRenderSystem
 import com.goncharov.evgeny.obstacleavoid.util.GdxUtils
 
 class GameScreen(
-    private val assetManager: AssetManager,
+    assetManager: AssetManager,
     private val shapeRenderer: ShapeRenderer,
     private val batch: SpriteBatch,
     private val navigation: Navigation,
@@ -43,9 +44,14 @@ class GameScreen(
 
     private var reset = false
 
+    private val font = assetManager[FONT_DESCRIPTOR]
+
+    private val gridRenderSystem = GridRenderSystem(gameViewport, shapeRenderer)
+    private val fpsMonitorSystem = FpsMonitorSystem(batch, font, uiViewport)
+    private val debugRenderSystem = DebugRenderSystem(gameViewport, shapeRenderer)
+
     override fun show() {
         debug("show")
-        val font = assetManager[FONT_DESCRIPTOR]
         val listener = object : CollisionListener {
             override fun hitObstacle() {
                 GameManager.decrementLives()
@@ -68,13 +74,9 @@ class GameScreen(
         engine.addSystem(ScoreSystem())
         engine.addSystem(RenderSystem(gameViewport, batch))
         engine.addSystem(UiRenderSystem(font, uiViewport, batch))
-        if (DEBUG) {
-            engine.addSystem(GridRenderSystem(gameViewport, shapeRenderer))
-            engine.addSystem(DebugRenderSystem(gameViewport, shapeRenderer))
-            engine.addSystem(DebugGameCameraSystem(gameCamera))
-            engine.addSystem(FpsMonitorSystem(batch, font, uiViewport))
-        }
+        engine.addSystem(DebugGameCameraSystem(gameCamera))
         addEntities()
+        Gdx.input.inputProcessor = this
     }
 
     override fun render(delta: Float) {
@@ -98,6 +100,28 @@ class GameScreen(
 
     override fun dispose() {
         Gdx.input.inputProcessor = null
+    }
+
+    override fun keyDown(keycode: Int): Boolean {
+        when (keycode) {
+            Input.Keys.C -> {
+                if (engine.systems.contains(gridRenderSystem, true)) {
+                    engine.removeSystem(gridRenderSystem)
+                    engine.removeSystem(debugRenderSystem)
+                } else {
+                    engine.addSystem(gridRenderSystem)
+                    engine.addSystem(debugRenderSystem)
+                }
+            }
+            Input.Keys.B -> {
+                if (engine.systems.contains(gridRenderSystem, true)) {
+                    engine.removeSystem(fpsMonitorSystem)
+                } else {
+                    engine.addSystem(fpsMonitorSystem)
+                }
+            }
+        }
+        return true
     }
 
     private fun addEntities() {

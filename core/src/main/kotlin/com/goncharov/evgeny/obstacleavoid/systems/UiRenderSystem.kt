@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.Viewport
 import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.managers.GameManager
-import com.goncharov.evgeny.obstacleavoid.screens.game.GameRender
 
 class UiRenderSystem(
     private val font: BitmapFont,
