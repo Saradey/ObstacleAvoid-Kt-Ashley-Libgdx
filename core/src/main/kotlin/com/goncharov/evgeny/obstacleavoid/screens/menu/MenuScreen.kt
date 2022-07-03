@@ -25,19 +25,14 @@ class MenuScreen(
         val table = Table()
         val gamePlayAtlas = assetManager[GAME_PLAY_DESCRIPTOR]
         table.background = TextureRegionDrawable(gamePlayAtlas.findRegion(BACKGROUND))
-
         val playButton = TextButton("PLAY", uiSkin)
         playButton.addListenerKtx(::play)
-
         val highScoreButton = TextButton("HIGHSCORE", uiSkin)
         highScoreButton.addListenerKtx(::showHighScore)
-
         val optionsButton = TextButton("OPTIONS", uiSkin)
         optionsButton.addListenerKtx(::showOptions)
-
         val quitButton = TextButton("QUIT", uiSkin)
         quitButton.addListenerKtx(::quit)
-
         val buttonTable = Table(uiSkin)
         buttonTable.defaults().pad(20f)
         buttonTable.setBackground(PANEL)
@@ -46,7 +41,6 @@ class MenuScreen(
         buttonTable.add(optionsButton).row()
         buttonTable.add(quitButton)
         buttonTable.center()
-
         table.add(buttonTable)
         table.center()
         table.setFillParent(true)
