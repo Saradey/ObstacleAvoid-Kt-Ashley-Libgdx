@@ -16,6 +16,7 @@ import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors.FONT_DESCRIPTO
 import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
+import com.goncharov.evgeny.obstacleavoid.managers.SavedManagers
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 import com.goncharov.evgeny.obstacleavoid.systems.debug.DebugUiCameraSystem
 import com.goncharov.evgeny.obstacleavoid.systems.debug.FpsMonitorSystem
@@ -31,7 +32,7 @@ abstract class BaseStageScreen(
     private val viewport = FitViewport(UI_WIDTH, UI_HEIGHT, camera)
     private val stage = Stage(viewport, batch)
     protected val uiSkin: Skin = assetManager[AssetDescriptors.UI_SKIN_DESCRIPTOR]
-    private val engine = Engine()
+    protected val engine = Engine()
     private val factory = EntityFactory(engine, assetManager)
 
     override fun show() {

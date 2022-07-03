@@ -10,7 +10,6 @@ import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.UI_HEIGHT
 import com.goncharov.evgeny.obstacleavoid.consts.UI_WIDTH
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
-import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 
 class UiRenderSystem(
     private val font: BitmapFont,
@@ -33,11 +32,11 @@ class UiRenderSystem(
     }
 
     private fun draw() {
-        val liveText = LIVE_TEXT.format(GameManager.lives)
+        val liveText = LIVE_TEXT.format(gm.lives)
         layout.setText(font, liveText)
         font.color = Color.WHITE
         font.draw(batch, liveText, 20f, UI_HEIGHT - layout.height)
-        val scoreText = SCORE_TEXT.format(GameManager.score)
+        val scoreText = SCORE_TEXT.format(gm.score)
         layout.setText(font, scoreText)
         font.draw(batch, scoreText, UI_WIDTH - layout.width - 20f, UI_HEIGHT - layout.height)
         if (gm.gameIsOver()) {

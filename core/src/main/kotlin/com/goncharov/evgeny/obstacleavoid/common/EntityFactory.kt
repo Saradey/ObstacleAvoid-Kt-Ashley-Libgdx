@@ -2,17 +2,18 @@ package com.goncharov.evgeny.obstacleavoid.common
 
 import com.badlogic.ashley.core.Engine
 import com.badlogic.ashley.core.Entity
+import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.goncharov.evgeny.obstacleavoid.components.*
 import com.goncharov.evgeny.obstacleavoid.consts.*
+import com.goncharov.evgeny.obstacleavoid.models.DifficultyLevel
 
 
 class EntityFactory(
     private val engine: Engine,
     assetManager: AssetManager
 ) {
-
     private val gamePlayAtlas: TextureAtlas = assetManager[GAME_PLAY]
 
     fun addPlayer() {
@@ -85,8 +86,13 @@ class EntityFactory(
     }
 
     fun addGameManager() {
-        val gameManagerComponent = engine.createComponent(GameManagerComponent::class.java)
         val entity = engine.createEntity()
+        val gameManagerComponent = engine.createComponent(GameManagerComponent::class.java)
+        val prefs = Gdx.app.getPreferences(PREFS_NAME)
+        gameManagerComponent.highScore = prefs.getInteger(HIGH_SCORE_KEY, 0)
+        gameManagerComponent.difficultyLevel = DifficultyLevel.valueOf(
+            prefs.getString(DIFFICULTY_KEY, DifficultyLevel.MEDIUM.name)
+        )
         val debugComponent = engine.createComponent(DebugComponent::class.java)
         entity.add(debugComponent)
         entity.add(gameManagerComponent)

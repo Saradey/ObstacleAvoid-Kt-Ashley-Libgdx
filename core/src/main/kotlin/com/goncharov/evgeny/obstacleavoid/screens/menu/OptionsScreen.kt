@@ -6,11 +6,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor
 import com.badlogic.gdx.scenes.scene2d.ui.*
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 import com.goncharov.evgeny.obstacleavoid.common.BaseStageScreen
+import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.common.addListenerKtx
 import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors
 import com.goncharov.evgeny.obstacleavoid.consts.BACKGROUND
 import com.goncharov.evgeny.obstacleavoid.consts.PANEL
-import com.goncharov.evgeny.obstacleavoid.managers.GameManager
+import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
+import com.goncharov.evgeny.obstacleavoid.managers.SavedManagers
 import com.goncharov.evgeny.obstacleavoid.models.DifficultyLevel
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
@@ -22,8 +24,11 @@ class OptionsScreen(
 ) : BaseStageScreen(navigation, assetManager, batch) {
 
     private var group: ButtonGroup<CheckBox>? = null
+    private val savedManagers = SavedManagers(engine)
 
     override fun initUi(): Actor {
+        val gameEntity = engine.getEntitiesFor(gameManagerFamily).first()
+        val gameComponent = Mappers.game[gameEntity]
         val table = Table()
         table.defaults().pad(15f)
         val textureAtlas = assetManager[AssetDescriptors.GAME_PLAY_DESCRIPTOR]
@@ -37,7 +42,7 @@ class OptionsScreen(
         val hard = createCheckBox(DifficultyLevel.HARD.name)
         hard.addListenerKtx(::difficultyChanged)
         group = ButtonGroup(easy, medium, hard)
-        group?.setChecked(GameManager.getDifficultyLevel().name)
+        group?.setChecked(gameComponent.difficultyLevel.name)
         val backButton = TextButton("BACK", uiSkin)
         backButton.addListenerKtx(::back)
         val contentTable = Table(uiSkin)
@@ -72,6 +77,9 @@ class OptionsScreen(
         debug("select difficulty")
         group?.checked ?: return
         val checkBoxTag = group?.checked?.name.orEmpty()
-        GameManager.updateDifficulty(DifficultyLevel.valueOf(checkBoxTag))
+        val gameEntity = engine.getEntitiesFor(gameManagerFamily).first()
+        val gameComponent = Mappers.game[gameEntity]
+        gameComponent.difficultyLevel = DifficultyLevel.valueOf(checkBoxTag)
+        savedManagers.saveDifficultyLevel()
     }
 }
