@@ -1,8 +1,6 @@
 package com.goncharov.evgeny.obstacleavoid.systems
 
-import com.badlogic.ashley.core.Entity
 import com.badlogic.ashley.core.EntitySystem
-import com.badlogic.ashley.systems.IteratingSystem
 import com.goncharov.evgeny.obstacleavoid.common.EntityFactory
 import com.goncharov.evgeny.obstacleavoid.common.Mappers
 import com.goncharov.evgeny.obstacleavoid.consts.gameManagerFamily
@@ -23,6 +21,7 @@ class GameOverSystem(
             navigation.navigate(KeyNavigation.MenuKey)
         }
         if (gm.reset) {
+            engine.removeAllEntities()
             gm.reset = false
             addEntities()
         }

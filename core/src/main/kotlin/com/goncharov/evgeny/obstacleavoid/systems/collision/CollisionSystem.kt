@@ -51,7 +51,6 @@ class CollisionSystem(
     private fun isHit() {
         gm.lives--
         gm.reset = true
-        engine.removeAllEntities()
         sound.play()
     }
 
