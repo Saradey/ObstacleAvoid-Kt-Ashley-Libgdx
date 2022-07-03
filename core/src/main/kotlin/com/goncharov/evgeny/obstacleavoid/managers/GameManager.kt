@@ -3,7 +3,7 @@ package com.goncharov.evgeny.obstacleavoid.managers
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Preferences
 import com.goncharov.evgeny.obstacleavoid.consts.LIVES_START
-import com.goncharov.evgeny.obstacleavoid.managers.models.DifficultyLevel
+import com.goncharov.evgeny.obstacleavoid.models.DifficultyLevel
 
 object GameManager {
 

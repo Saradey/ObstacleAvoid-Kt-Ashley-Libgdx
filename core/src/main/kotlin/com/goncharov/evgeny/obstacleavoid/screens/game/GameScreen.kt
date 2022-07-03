@@ -34,14 +34,13 @@ class GameScreen(
     private val gameCamera = OrthographicCamera()
     private val gameViewport = FitViewport(WORLD_WIDTH, WORLD_HEIGHT, gameCamera)
     private val uiViewport = FitViewport(UI_WIDTH, UI_HEIGHT)
-
     private val engine = PooledEngine()
-
-    private val factory = EntityFactory(engine, assetManager)
+    private lateinit var factory: EntityFactory
 
     override fun show() {
         debug("show")
         val font = assetManager[FONT_DESCRIPTOR]
+        factory = EntityFactory(engine, assetManager)
         addEntities()
         engine.addSystem(PlayerControlSystem(gameViewport))
         engine.addSystem(MovementSystem())
@@ -78,8 +77,8 @@ class GameScreen(
     }
 
     private fun addEntities() {
+        factory.addGameManager()
         factory.addBackground()
         factory.addPlayer()
-        factory.addGameManager()
     }
 }

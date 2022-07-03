@@ -11,7 +11,7 @@ import com.goncharov.evgeny.obstacleavoid.consts.AssetDescriptors
 import com.goncharov.evgeny.obstacleavoid.consts.BACKGROUND
 import com.goncharov.evgeny.obstacleavoid.consts.PANEL
 import com.goncharov.evgeny.obstacleavoid.managers.GameManager
-import com.goncharov.evgeny.obstacleavoid.managers.models.DifficultyLevel
+import com.goncharov.evgeny.obstacleavoid.models.DifficultyLevel
 import com.goncharov.evgeny.obstacleavoid.navigation.KeyNavigation
 import com.goncharov.evgeny.obstacleavoid.navigation.Navigation
 

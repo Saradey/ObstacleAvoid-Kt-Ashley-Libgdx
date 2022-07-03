@@ -20,7 +20,7 @@ class ObstacleSpawnSystem(
     }
 
     override fun updateInterval() {
-        if (!gameComponent.gameIsPause) {
+        if (!gameComponent.gameIsPause && !gameComponent.gameIsOver()) {
             val min = 0f
             val max = WORLD_WIDTH - OBSTACLE_SIZE
             factory.addObstacle(MathUtils.random(min, max), WORLD_HEIGHT)

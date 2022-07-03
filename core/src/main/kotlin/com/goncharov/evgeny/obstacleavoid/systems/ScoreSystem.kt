@@ -16,7 +16,7 @@ class ScoreSystem : IntervalSystem(
     }
 
     override fun updateInterval() {
-        if (!gameComponent.gameIsPause) {
+        if (!gameComponent.gameIsPause && !gameComponent.gameIsOver()) {
             GameManager.updateScore(MathUtils.random(1, 5))
         }
     }

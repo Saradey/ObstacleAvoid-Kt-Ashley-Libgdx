@@ -34,7 +34,7 @@ class PlayerControlSystem(
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val movement = Mappers.movement[entity]
         movement.xSpeed = 0f
-        if (!gameComponent.gameIsPause) {
+        if (!gameComponent.gameIsPause && !gameComponent.gameIsOver()) {
             when {
                 Gdx.input.isKeyPressed(Input.Keys.A) -> {
                     movement.xSpeed = -MAX_PLAYER_X_SPEED

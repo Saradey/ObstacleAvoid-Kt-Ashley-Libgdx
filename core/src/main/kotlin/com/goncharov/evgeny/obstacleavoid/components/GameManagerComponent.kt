@@ -2,7 +2,7 @@ package com.goncharov.evgeny.obstacleavoid.components
 
 import com.badlogic.ashley.core.Component
 import com.goncharov.evgeny.obstacleavoid.consts.LIVES_START
-import com.goncharov.evgeny.obstacleavoid.managers.models.DifficultyLevel
+import com.goncharov.evgeny.obstacleavoid.models.DifficultyLevel
 
 class GameManagerComponent : Component {
     var gameIsPause = false

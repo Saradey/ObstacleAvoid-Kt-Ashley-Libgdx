@@ -6,7 +6,6 @@ import com.badlogic.gdx.assets.AssetManager
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.goncharov.evgeny.obstacleavoid.components.*
 import com.goncharov.evgeny.obstacleavoid.consts.*
-import com.goncharov.evgeny.obstacleavoid.managers.GameManager
 
 
 class EntityFactory(
@@ -45,7 +44,9 @@ class EntityFactory(
         val bounds = engine.createComponent(BoundsComponent::class.java)
         bounds.bounds.set(x, y, OBSTACLE_BOUNDS_RADIUS)
         val movement = engine.createComponent(MovementComponent::class.java)
-        movement.ySpeed = -GameManager.getDifficultyLevel().obstacleSpeed
+        val gm = engine.getEntitiesFor(gameManagerFamily).first()
+        val gameComponent = Mappers.game[gm]
+        movement.ySpeed = -gameComponent.difficultyLevel.obstacleSpeed
         val position = engine.createComponent(PositionComponent::class.java)
         position.x = x
         position.y = y

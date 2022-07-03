@@ -1,4 +1,4 @@
-package com.goncharov.evgeny.obstacleavoid.managers.models
+package com.goncharov.evgeny.obstacleavoid.models
 
 import com.goncharov.evgeny.obstacleavoid.consts.EASY_OBSTACLE_SPEED
 import com.goncharov.evgeny.obstacleavoid.consts.HARD_OBSTACLE_SPEED
